@@ -20,7 +20,95 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
+}
+
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar {
+  transition: width 0.5s ease;
+}
+
+.chat-message {
+  max-width: 80%;
+  animation: fadeIn 0.3s, slideIn 0.3s;
+}
+
+.slide-transition {
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.fade-transition {
+  transition: opacity 0.4s ease;
+}
+
+.medical-icon {
+  background: linear-gradient(135deg, #0ea5e9, #22c55e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom scrollbar for chat */
+.chat-history::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-history::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.chat-history::-webkit-scrollbar-thumb {
+  background: #7dd3fc;
+  border-radius: 10px;
+}
+
+.chat-history::-webkit-scrollbar-thumb:hover {
+  background: #0ea5e9;
+}
+
+/* Animation for appointment confirmation */
+@keyframes checkmark {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.checkmark-animate {
+  animation: checkmark 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes slideIn {
+  0% { transform: translateY(10px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes pulseSoft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.5s ease-out;
+}
+
+.animate-pulse-soft {
+  animation: pulseSoft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
