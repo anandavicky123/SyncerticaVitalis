@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 export default function SymptomChecker() {
-  const [activeSymptomType, setActiveSymptomType] = useState('physical');
 
   return (
     <div className="bg-gray-50 text-gray-800 min-h-screen">
@@ -18,7 +17,7 @@ export default function SymptomChecker() {
             <h1 className="text-xl font-bold text-blue-800">Syncertica Vitalis</h1>
           </div>
           <nav className="hidden md:flex space-x-8">
-            <Link href="/" className="text-blue-700 hover:text-blue-500 font-medium">Dashboard</Link>
+            <Link href="/dashboard" className="text-blue-700 hover:text-blue-500 font-medium">Dashboard</Link>
             <Link href="/symptom-checker" className="text-blue-700 hover:text-blue-500 font-medium border-b-2 border-blue-500">Symptom Checker</Link>
             <Link href="/medical-checkup" className="text-blue-700 hover:text-blue-500 font-medium">Checkup</Link>
             <Link href="/appointments" className="text-blue-700 hover:text-blue-500 font-medium">Appointments</Link>
@@ -40,7 +39,7 @@ export default function SymptomChecker() {
         {/* Page Header */}
         <section className="mb-8">
           <div className="flex items-center mb-4">
-            <Link href="/" className="text-blue-600 hover:text-blue-800 mr-2">
+            <Link href="/dashboard" className="text-blue-600 hover:text-blue-800 mr-2">
               <i className="fas fa-arrow-left"></i> Back to Dashboard
             </Link>
           </div>
@@ -50,30 +49,9 @@ export default function SymptomChecker() {
 
         {/* AI Symptom Checker */}
         <section className="mb-16">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-3xl font-bold text-blue-800">Describe Your Symptoms</h2>
-            <div className="flex items-center space-x-2 bg-blue-100 rounded-full p-1">
-              <button 
-                onClick={() => setActiveSymptomType('physical')}
-                className={`px-4 py-2 rounded-full transition-all ${
-                  activeSymptomType === 'physical' 
-                    ? 'bg-blue-500 text-white' 
-                    : 'bg-transparent text-blue-700'
-                }`}
-              >
-                Physical
-              </button>
-              <button 
-                onClick={() => setActiveSymptomType('psychological')}
-                className={`px-4 py-2 rounded-full transition-all ${
-                  activeSymptomType === 'psychological' 
-                    ? 'bg-blue-500 text-white' 
-                    : 'bg-transparent text-blue-700'
-                }`}
-              >
-                Psychological
-              </button>
-            </div>
+          <div className="mb-6">
+            <h2 className="text-3xl font-bold text-blue-800">Describe Your Physical Symptoms</h2>
+            <p className="text-gray-600 mt-2">Our AI focuses on physical health symptoms to provide accurate assessments.</p>
           </div>
           
           <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
@@ -253,7 +231,7 @@ export default function SymptomChecker() {
             </div>
           </div>
           <div className="border-t border-blue-800 mt-8 pt-8 text-sm text-blue-300 text-center">
-            <p>© 2023 Syncertica Vitalis. All rights reserved.</p>
+            <p>© 2025 Syncertica Vitalis. All rights reserved.</p>
           </div>
         </div>
       </footer>

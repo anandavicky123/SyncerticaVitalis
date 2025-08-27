@@ -4,20 +4,20 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 export default function MedicalCheckup() {
-  const [checkupProgress, setCheckupProgress] = useState(20);
+  const [checkupProgress, setCheckupProgress] = useState(33);
   const [currentStep, setCurrentStep] = useState(1);
 
   const nextStep = () => {
-    if (currentStep < 5) {
+    if (currentStep < 3) {
       setCurrentStep(currentStep + 1);
-      setCheckupProgress(checkupProgress + 20);
+      setCheckupProgress(checkupProgress + 33);
     }
   };
 
   const prevStep = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
-      setCheckupProgress(checkupProgress - 20);
+      setCheckupProgress(checkupProgress - 33);
     }
   };
 
@@ -33,7 +33,7 @@ export default function MedicalCheckup() {
             <h1 className="text-xl font-bold text-blue-800">Syncertica Vitalis</h1>
           </div>
           <nav className="hidden md:flex space-x-8">
-            <Link href="/" className="text-blue-700 hover:text-blue-500 font-medium">Dashboard</Link>
+            <Link href="/dashboard" className="text-blue-700 hover:text-blue-500 font-medium">Dashboard</Link>
             <Link href="/symptom-checker" className="text-blue-700 hover:text-blue-500 font-medium">Symptom Checker</Link>
             <Link href="/medical-checkup" className="text-blue-700 hover:text-blue-500 font-medium border-b-2 border-blue-500">Checkup</Link>
             <Link href="/appointments" className="text-blue-700 hover:text-blue-500 font-medium">Appointments</Link>
@@ -41,8 +41,11 @@ export default function MedicalCheckup() {
             <Link href="/insurance" className="text-blue-700 hover:text-blue-500 font-medium">Insurance</Link>
           </nav>
           <div className="flex items-center space-x-4">
-            <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full transition-all duration-300 shadow-md hover:shadow-lg">
-              Sign In
+            <Link href="/profile" className="text-blue-700 hover:text-blue-500 font-medium">
+              <i className="fas fa-user mr-2"></i>Profile
+            </Link>
+            <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full transition-all duration-300 shadow-md hover:shadow-lg">
+              Sign Out
             </button>
             <button className="md:hidden text-blue-700">
               <i className="fas fa-bars text-xl"></i>
@@ -55,12 +58,25 @@ export default function MedicalCheckup() {
         {/* Page Header */}
         <section className="mb-8">
           <div className="flex items-center mb-4">
-            <Link href="/" className="text-blue-600 hover:text-blue-800 mr-2">
+            <Link href="/dashboard" className="text-blue-600 hover:text-blue-800 mr-2">
               <i className="fas fa-arrow-left"></i> Back to Dashboard
             </Link>
           </div>
           <h1 className="text-4xl font-bold text-blue-800 mb-4">Fast Medical Checkup</h1>
-          <p className="text-lg text-gray-600">Complete your comprehensive health assessment in just a few minutes.</p>
+          <p className="text-lg text-gray-600">Complete your comprehensive health assessment in just a few minutes. Your basic information will be automatically retrieved from your profile.</p>
+        </section>
+
+        {/* Profile Info Notice */}
+        <section className="mb-8">
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+            <div className="flex items-center">
+              <i className="fas fa-info-circle text-blue-500 mr-3"></i>
+              <div>
+                <h4 className="font-medium text-blue-700">Using Your Profile Information</h4>
+                <p className="text-blue-600 text-sm">We'll use the personal information from your profile for this checkup. You can update your details in your <Link href="/profile" className="underline hover:text-blue-800">profile settings</Link>.</p>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* Fast Medical Checkup */}
@@ -68,46 +84,17 @@ export default function MedicalCheckup() {
           <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
             <div className="px-6 pt-6">
               <div className="flex justify-between items-center mb-4">
-                <h2 className="text-2xl font-bold text-blue-800">Step {currentStep} of 5</h2>
-                <span className="text-blue-600 font-medium">{checkupProgress}% Complete</span>
+                <h2 className="text-2xl font-bold text-blue-800">Step {currentStep} of 3</h2>
+                <span className="text-blue-600 font-medium">{Math.min(checkupProgress, 100)}% Complete</span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2.5 mb-6">
-                <div className="bg-green-500 h-2.5 rounded-full transition-all duration-500" style={{width: `${checkupProgress}%`}}></div>
+                <div className="bg-green-500 h-2.5 rounded-full transition-all duration-500" style={{width: `${Math.min(checkupProgress, 100)}%`}}></div>
               </div>
             </div>
             
             <div className="px-6 pb-6">
-              {/* Step 1: Basic Information */}
+              {/* Step 1: Medical History */}
               {currentStep === 1 && (
-                <div>
-                  <h3 className="text-xl font-semibold text-blue-800 mb-4">Basic Information</h3>
-                  <div className="grid md:grid-cols-2 gap-4 mb-6">
-                    <div>
-                      <label className="block text-blue-700 mb-2">First Name</label>
-                      <input type="text" className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300" />
-                    </div>
-                    <div>
-                      <label className="block text-blue-700 mb-2">Last Name</label>
-                      <input type="text" className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300" />
-                    </div>
-                    <div>
-                      <label className="block text-blue-700 mb-2">Date of Birth</label>
-                      <input type="date" className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300" />
-                    </div>
-                    <div>
-                      <label className="block text-blue-700 mb-2">Biological Sex</label>
-                      <select className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300">
-                        <option>Male</option>
-                        <option>Female</option>
-                        <option>Other</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Step 2: Medical History */}
-              {currentStep === 2 && (
                 <div>
                   <h3 className="text-xl font-semibold text-blue-800 mb-4">Medical History</h3>
                   <div className="space-y-4 mb-6">
@@ -148,8 +135,8 @@ export default function MedicalCheckup() {
                 </div>
               )}
 
-              {/* Step 3: Lifestyle */}
-              {currentStep === 3 && (
+              {/* Step 2: Lifestyle */}
+              {currentStep === 2 && (
                 <div>
                   <h3 className="text-xl font-semibold text-blue-800 mb-4">Lifestyle Assessment</h3>
                   <div className="space-y-4 mb-6">
@@ -185,8 +172,8 @@ export default function MedicalCheckup() {
                 </div>
               )}
 
-              {/* Step 4: Current Symptoms */}
-              {currentStep === 4 && (
+              {/* Step 3: Current Symptoms */}
+              {currentStep === 3 && (
                 <div>
                   <h3 className="text-xl font-semibold text-blue-800 mb-4">Current Symptoms</h3>
                   <div className="space-y-4 mb-6">
@@ -228,33 +215,6 @@ export default function MedicalCheckup() {
                       ></textarea>
                     </div>
                   </div>
-                </div>
-              )}
-
-              {/* Step 5: Review & Submit */}
-              {currentStep === 5 && (
-                <div>
-                  <h3 className="text-xl font-semibold text-blue-800 mb-4">Review Your Information</h3>
-                  <div className="bg-gray-50 rounded-xl p-6 mb-6">
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div>
-                        <h4 className="font-medium text-blue-700 mb-2">Personal Information</h4>
-                        <p className="text-gray-600">John Doe, Male, Born: 1990-01-01</p>
-                      </div>
-                      <div>
-                        <h4 className="font-medium text-blue-700 mb-2">Medical History</h4>
-                        <p className="text-gray-600">No chronic conditions reported</p>
-                      </div>
-                      <div>
-                        <h4 className="font-medium text-blue-700 mb-2">Lifestyle</h4>
-                        <p className="text-gray-600">Exercises 3-4 times per week, Non-smoker</p>
-                      </div>
-                      <div>
-                        <h4 className="font-medium text-blue-700 mb-2">Current Symptoms</h4>
-                        <p className="text-gray-600">Mild headache, feeling tired</p>
-                      </div>
-                    </div>
-                  </div>
                   <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
                     <h4 className="font-medium text-blue-700 mb-2 flex items-center">
                       <i className="fas fa-info-circle mr-2"></i> Next Steps
@@ -272,7 +232,7 @@ export default function MedicalCheckup() {
                 >
                   <i className="fas fa-arrow-left mr-2"></i> Back
                 </button>
-                {currentStep < 5 ? (
+                {currentStep < 3 ? (
                   <button 
                     onClick={nextStep}
                     className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-xl transition-colors ml-auto"
@@ -388,7 +348,7 @@ export default function MedicalCheckup() {
             </div>
           </div>
           <div className="border-t border-blue-800 mt-8 pt-8 text-sm text-blue-300 text-center">
-            <p>© 2023 Syncertica Vitalis. All rights reserved.</p>
+            <p>© 2025 Syncertica Vitalis. All rights reserved.</p>
           </div>
         </div>
       </footer>
