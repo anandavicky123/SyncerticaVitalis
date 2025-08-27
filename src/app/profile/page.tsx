@@ -1,81 +1,95 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Profile() {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState('personal');
+  const [activeTab, setActiveTab] = useState("personal");
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  
+
   const [profileData, setProfileData] = useState({
     // Personal Information
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@example.com',
-    phone: '+1 (555) 123-4567',
-    dateOfBirth: '1990-05-15',
-    gender: 'male',
-    
+    firstName: "John",
+    lastName: "Doe",
+    email: "john.doe@example.com",
+    phone: "+1 (555) 123-4567",
+    dateOfBirth: "1990-05-15",
+    gender: "male",
+
     // Location Information
-    address: '123 Main Street',
-    city: 'New York',
-    state: 'NY',
-    zipCode: '10001',
-    country: 'United States',
-    
+    address: "123 Main Street",
+    city: "New York",
+    state: "NY",
+    zipCode: "10001",
+    country: "United States",
+
     // Identity & Preferences
-    pronouns: 'he/him',
-    preferredLanguage: 'english',
-    emergencyContact: 'Jane Doe',
-    emergencyPhone: '+1 (555) 987-6543',
-    
+    pronouns: "he/him",
+    preferredLanguage: "english",
+    emergencyContact: "Jane Doe",
+    emergencyPhone: "+1 (555) 987-6543",
+
     // Medical Information
-    congenitalDiseases: ['Type 1 Diabetes'],
-    allergies: ['Penicillin', 'Shellfish'],
+    congenitalDiseases: ["Type 1 Diabetes"],
+    allergies: ["Penicillin", "Shellfish"],
     disabilities: [],
-    bloodType: 'O+',
-    height: '5\'10"',
-    weight: '175 lbs',
-    
+    bloodType: "O+",
+    height: "5'10\"",
+    weight: "175 lbs",
+
     // Additional Medical Info
-    medications: ['Insulin', 'Metformin'],
-    medicalConditions: ['Diabetes Type 1', 'Hypertension'],
-    surgeries: ['Appendectomy (2015)'],
-    familyHistory: ['Heart Disease (Father)', 'Diabetes (Mother)']
+    medications: ["Insulin", "Metformin"],
+    medicalConditions: ["Diabetes Type 1", "Hypertension"],
+    surgeries: ["Appendectomy (2015)"],
+    familyHistory: ["Heart Disease (Father)", "Diabetes (Mother)"],
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
     const { name, value } = e.target;
-    setProfileData(prev => ({
+    setProfileData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  const handleArrayInputChange = (field: string, index: number, value: string) => {
-    setProfileData(prev => ({
+  const handleArrayInputChange = (
+    field: string,
+    index: number,
+    value: string
+  ) => {
+    setProfileData((prev) => ({
       ...prev,
-      [field]: prev[field as keyof typeof prev].map((item: string, i: number) => 
+      [field]: prev[field as keyof typeof prev].map((item: string, i: number) =>
         i === index ? value : item
-      )
+      ),
     }));
   };
 
   const addArrayItem = (field: string) => {
-    setProfileData(prev => ({
+    setProfileData((prev) => ({
       ...prev,
-      [field]: [...prev[field as keyof typeof prev], '']
+      [field]: [...prev[field as keyof typeof prev], ""],
     }));
   };
 
   const removeArrayItem = (field: string, index: number) => {
-    setProfileData(prev => ({
-      ...prev,
-      [field]: prev[field as keyof typeof prev].filter((_: any, i: number) => i !== index)
-    }));
+    setProfileData((prev) => {
+      const value = prev[field as keyof typeof prev];
+      if (Array.isArray(value)) {
+        return {
+          ...prev,
+          [field]: value.filter((_, i: number) => i !== index),
+        };
+      }
+      return prev;
+    });
   };
 
   const handleSave = async () => {
@@ -90,17 +104,17 @@ export default function Profile() {
 
   const handleSignOut = () => {
     // Clear any stored authentication data
-    localStorage.removeItem('authToken');
-    sessionStorage.removeItem('authToken');
+    localStorage.removeItem("authToken");
+    sessionStorage.removeItem("authToken");
     // Redirect to landing page
-    router.push('/');
+    router.push("/");
   };
 
   const tabs = [
-    { id: 'personal', label: 'Personal Info', icon: 'fas fa-user' },
-    { id: 'medical', label: 'Medical Info', icon: 'fas fa-heartbeat' },
-    { id: 'emergency', label: 'Emergency', icon: 'fas fa-phone' },
-    { id: 'preferences', label: 'Preferences', icon: 'fas fa-cog' }
+    { id: "personal", label: "Personal Info", icon: "fas fa-user" },
+    { id: "medical", label: "Medical Info", icon: "fas fa-heartbeat" },
+    { id: "emergency", label: "Emergency", icon: "fas fa-phone" },
+    { id: "preferences", label: "Preferences", icon: "fas fa-cog" },
   ];
 
   return (
@@ -112,21 +126,56 @@ export default function Profile() {
             <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-green-500 flex items-center justify-center">
               <i className="fas fa-heartbeat text-white text-xl"></i>
             </div>
-            <h1 className="text-xl font-bold text-blue-800">Syncertica Vitalis</h1>
+            <h1 className="text-xl font-bold text-blue-800">
+              Syncertica Vitalis
+            </h1>
           </div>
           <nav className="hidden md:flex space-x-8">
-            <Link href="/dashboard" className="text-blue-700 hover:text-blue-500 font-medium">Dashboard</Link>
-            <Link href="/symptom-checker" className="text-blue-700 hover:text-blue-500 font-medium">Symptom Checker</Link>
-            <Link href="/medical-checkup" className="text-blue-700 hover:text-blue-500 font-medium">Checkup</Link>
-            <Link href="/appointments" className="text-blue-700 hover:text-blue-500 font-medium">Appointments</Link>
-            <Link href="/ehr" className="text-blue-700 hover:text-blue-500 font-medium">EHR</Link>
-            <Link href="/insurance" className="text-blue-700 hover:text-blue-500 font-medium">Insurance</Link>
+            <Link
+              href="/dashboard"
+              className="text-blue-700 hover:text-blue-500 font-medium"
+            >
+              Dashboard
+            </Link>
+            <Link
+              href="/symptom-checker"
+              className="text-blue-700 hover:text-blue-500 font-medium"
+            >
+              Symptom Checker
+            </Link>
+            <Link
+              href="/medical-checkup"
+              className="text-blue-700 hover:text-blue-500 font-medium"
+            >
+              Checkup
+            </Link>
+            <Link
+              href="/appointments"
+              className="text-blue-700 hover:text-blue-500 font-medium"
+            >
+              Appointments
+            </Link>
+            <Link
+              href="/ehr"
+              className="text-blue-700 hover:text-blue-500 font-medium"
+            >
+              EHR
+            </Link>
+            <Link
+              href="/insurance"
+              className="text-blue-700 hover:text-blue-500 font-medium"
+            >
+              Insurance
+            </Link>
           </nav>
           <div className="flex items-center space-x-4">
-            <Link href="/profile" className="text-blue-700 hover:text-blue-500 font-medium border-b-2 border-blue-500">
+            <Link
+              href="/profile"
+              className="text-blue-700 hover:text-blue-500 font-medium border-b-2 border-blue-500"
+            >
               <i className="fas fa-user mr-2"></i>Profile
             </Link>
-            <button 
+            <button
               onClick={handleSignOut}
               className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full transition-all duration-300 shadow-md hover:shadow-lg"
             >
@@ -152,7 +201,10 @@ export default function Profile() {
                   {profileData.firstName} {profileData.lastName}
                 </h1>
                 <p className="text-blue-700">{profileData.email}</p>
-                <p className="text-gray-600">Patient ID: #SV-{Math.random().toString(36).substr(2, 9).toUpperCase()}</p>
+                <p className="text-gray-600">
+                  Patient ID: #SV-
+                  {Math.random().toString(36).substr(2, 9).toUpperCase()}
+                </p>
               </div>
             </div>
             <div className="flex space-x-4">
@@ -205,8 +257,8 @@ export default function Profile() {
                   onClick={() => setActiveTab(tab.id)}
                   className={`py-4 px-2 border-b-2 font-medium text-sm flex items-center space-x-2 ${
                     activeTab === tab.id
-                      ? 'border-blue-500 text-blue-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                      ? "border-blue-500 text-blue-600"
+                      : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
                   }`}
                 >
                   <i className={tab.icon}></i>
@@ -218,13 +270,17 @@ export default function Profile() {
 
           <div className="p-8">
             {/* Personal Information Tab */}
-            {activeTab === 'personal' && (
+            {activeTab === "personal" && (
               <div className="space-y-6">
-                <h2 className="text-2xl font-bold text-blue-900 mb-6">Personal Information</h2>
-                
+                <h2 className="text-2xl font-bold text-blue-900 mb-6">
+                  Personal Information
+                </h2>
+
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      First Name
+                    </label>
                     <input
                       type="text"
                       name="firstName"
@@ -235,7 +291,9 @@ export default function Profile() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Last Name
+                    </label>
                     <input
                       type="text"
                       name="lastName"
@@ -246,7 +304,9 @@ export default function Profile() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Email
+                    </label>
                     <input
                       type="email"
                       name="email"
@@ -257,7 +317,9 @@ export default function Profile() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Phone
+                    </label>
                     <input
                       type="tel"
                       name="phone"
@@ -268,7 +330,9 @@ export default function Profile() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Date of Birth</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Date of Birth
+                    </label>
                     <input
                       type="date"
                       name="dateOfBirth"
@@ -279,7 +343,9 @@ export default function Profile() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Gender</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Gender
+                    </label>
                     <select
                       name="gender"
                       value={profileData.gender}
@@ -290,11 +356,15 @@ export default function Profile() {
                       <option value="male">Male</option>
                       <option value="female">Female</option>
                       <option value="non-binary">Non-binary</option>
-                      <option value="prefer-not-to-say">Prefer not to say</option>
+                      <option value="prefer-not-to-say">
+                        Prefer not to say
+                      </option>
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Pronouns</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Pronouns
+                    </label>
                     <select
                       name="pronouns"
                       value={profileData.pronouns}
@@ -310,10 +380,14 @@ export default function Profile() {
                   </div>
                 </div>
 
-                <h3 className="text-xl font-semibold text-blue-800 mt-8 mb-4">Address Information</h3>
+                <h3 className="text-xl font-semibold text-blue-800 mt-8 mb-4">
+                  Address Information
+                </h3>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Street Address</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Street Address
+                    </label>
                     <input
                       type="text"
                       name="address"
@@ -324,7 +398,9 @@ export default function Profile() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">City</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      City
+                    </label>
                     <input
                       type="text"
                       name="city"
@@ -335,7 +411,9 @@ export default function Profile() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">State</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      State
+                    </label>
                     <input
                       type="text"
                       name="state"
@@ -346,7 +424,9 @@ export default function Profile() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">ZIP Code</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      ZIP Code
+                    </label>
                     <input
                       type="text"
                       name="zipCode"
@@ -357,7 +437,9 @@ export default function Profile() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Country</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Country
+                    </label>
                     <input
                       type="text"
                       name="country"
@@ -372,13 +454,17 @@ export default function Profile() {
             )}
 
             {/* Medical Information Tab */}
-            {activeTab === 'medical' && (
+            {activeTab === "medical" && (
               <div className="space-y-6">
-                <h2 className="text-2xl font-bold text-blue-900 mb-6">Medical Information</h2>
-                
+                <h2 className="text-2xl font-bold text-blue-900 mb-6">
+                  Medical Information
+                </h2>
+
                 <div className="grid md:grid-cols-3 gap-6 mb-8">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Blood Type</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Blood Type
+                    </label>
                     <select
                       name="bloodType"
                       value={profileData.bloodType}
@@ -397,7 +483,9 @@ export default function Profile() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Height</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Height
+                    </label>
                     <input
                       type="text"
                       name="height"
@@ -409,7 +497,9 @@ export default function Profile() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Weight</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Weight
+                    </label>
                     <input
                       type="text"
                       name="weight"
@@ -424,20 +514,33 @@ export default function Profile() {
 
                 {/* Congenital Diseases */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Congenital Diseases</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Congenital Diseases
+                  </label>
                   {profileData.congenitalDiseases.map((disease, index) => (
-                    <div key={index} className="flex items-center space-x-2 mb-2">
+                    <div
+                      key={index}
+                      className="flex items-center space-x-2 mb-2"
+                    >
                       <input
                         type="text"
                         value={disease}
-                        onChange={(e) => handleArrayInputChange('congenitalDiseases', index, e.target.value)}
+                        onChange={(e) =>
+                          handleArrayInputChange(
+                            "congenitalDiseases",
+                            index,
+                            e.target.value
+                          )
+                        }
                         disabled={!isEditing}
                         className="flex-1 px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-50"
                         placeholder="Enter congenital disease"
                       />
                       {isEditing && (
                         <button
-                          onClick={() => removeArrayItem('congenitalDiseases', index)}
+                          onClick={() =>
+                            removeArrayItem("congenitalDiseases", index)
+                          }
                           className="text-red-500 hover:text-red-700"
                         >
                           <i className="fas fa-trash"></i>
@@ -447,7 +550,7 @@ export default function Profile() {
                   ))}
                   {isEditing && (
                     <button
-                      onClick={() => addArrayItem('congenitalDiseases')}
+                      onClick={() => addArrayItem("congenitalDiseases")}
                       className="text-blue-500 hover:text-blue-700 text-sm flex items-center"
                     >
                       <i className="fas fa-plus mr-1"></i>
@@ -458,20 +561,31 @@ export default function Profile() {
 
                 {/* Allergies */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Allergies</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Allergies
+                  </label>
                   {profileData.allergies.map((allergy, index) => (
-                    <div key={index} className="flex items-center space-x-2 mb-2">
+                    <div
+                      key={index}
+                      className="flex items-center space-x-2 mb-2"
+                    >
                       <input
                         type="text"
                         value={allergy}
-                        onChange={(e) => handleArrayInputChange('allergies', index, e.target.value)}
+                        onChange={(e) =>
+                          handleArrayInputChange(
+                            "allergies",
+                            index,
+                            e.target.value
+                          )
+                        }
                         disabled={!isEditing}
                         className="flex-1 px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-50"
                         placeholder="Enter allergy"
                       />
                       {isEditing && (
                         <button
-                          onClick={() => removeArrayItem('allergies', index)}
+                          onClick={() => removeArrayItem("allergies", index)}
                           className="text-red-500 hover:text-red-700"
                         >
                           <i className="fas fa-trash"></i>
@@ -481,7 +595,7 @@ export default function Profile() {
                   ))}
                   {isEditing && (
                     <button
-                      onClick={() => addArrayItem('allergies')}
+                      onClick={() => addArrayItem("allergies")}
                       className="text-blue-500 hover:text-blue-700 text-sm flex items-center"
                     >
                       <i className="fas fa-plus mr-1"></i>
@@ -492,23 +606,36 @@ export default function Profile() {
 
                 {/* Disabilities */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Disabilities</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Disabilities
+                  </label>
                   {profileData.disabilities.length === 0 && !isEditing && (
-                    <p className="text-gray-500 italic">No disabilities reported</p>
+                    <p className="text-gray-500 italic">
+                      No disabilities reported
+                    </p>
                   )}
                   {profileData.disabilities.map((disability, index) => (
-                    <div key={index} className="flex items-center space-x-2 mb-2">
+                    <div
+                      key={index}
+                      className="flex items-center space-x-2 mb-2"
+                    >
                       <input
                         type="text"
                         value={disability}
-                        onChange={(e) => handleArrayInputChange('disabilities', index, e.target.value)}
+                        onChange={(e) =>
+                          handleArrayInputChange(
+                            "disabilities",
+                            index,
+                            e.target.value
+                          )
+                        }
                         disabled={!isEditing}
                         className="flex-1 px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-50"
                         placeholder="Enter disability"
                       />
                       {isEditing && (
                         <button
-                          onClick={() => removeArrayItem('disabilities', index)}
+                          onClick={() => removeArrayItem("disabilities", index)}
                           className="text-red-500 hover:text-red-700"
                         >
                           <i className="fas fa-trash"></i>
@@ -518,7 +645,7 @@ export default function Profile() {
                   ))}
                   {isEditing && (
                     <button
-                      onClick={() => addArrayItem('disabilities')}
+                      onClick={() => addArrayItem("disabilities")}
                       className="text-blue-500 hover:text-blue-700 text-sm flex items-center"
                     >
                       <i className="fas fa-plus mr-1"></i>
@@ -530,13 +657,17 @@ export default function Profile() {
             )}
 
             {/* Emergency Contact Tab */}
-            {activeTab === 'emergency' && (
+            {activeTab === "emergency" && (
               <div className="space-y-6">
-                <h2 className="text-2xl font-bold text-blue-900 mb-6">Emergency Contact</h2>
-                
+                <h2 className="text-2xl font-bold text-blue-900 mb-6">
+                  Emergency Contact
+                </h2>
+
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Emergency Contact Name</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Emergency Contact Name
+                    </label>
                     <input
                       type="text"
                       name="emergencyContact"
@@ -547,7 +678,9 @@ export default function Profile() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Emergency Contact Phone</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Emergency Contact Phone
+                    </label>
                     <input
                       type="tel"
                       name="emergencyPhone"
@@ -562,13 +695,17 @@ export default function Profile() {
             )}
 
             {/* Preferences Tab */}
-            {activeTab === 'preferences' && (
+            {activeTab === "preferences" && (
               <div className="space-y-6">
-                <h2 className="text-2xl font-bold text-blue-900 mb-6">Preferences</h2>
-                
+                <h2 className="text-2xl font-bold text-blue-900 mb-6">
+                  Preferences
+                </h2>
+
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Preferred Language</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Preferred Language
+                    </label>
                     <select
                       name="preferredLanguage"
                       value={profileData.preferredLanguage}
@@ -596,33 +733,75 @@ export default function Profile() {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <h3 className="text-xl font-bold mb-4">Syncertica Vitalis</h3>
-              <p className="text-blue-200">Integrating AI and healthcare for better patient outcomes.</p>
+              <p className="text-blue-200">
+                Integrating AI and healthcare for better patient outcomes.
+              </p>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Services</h4>
               <ul className="space-y-2 text-blue-200">
-                <li><Link href="/symptom-checker" className="hover:text-white">Symptom Checker</Link></li>
-                <li><Link href="/medical-checkup" className="hover:text-white">Health Checkup</Link></li>
-                <li><Link href="/appointments" className="hover:text-white">Doctor Appointments</Link></li>
-                <li><Link href="/ehr" className="hover:text-white">Health Records</Link></li>
+                <li>
+                  <Link href="/symptom-checker" className="hover:text-white">
+                    Symptom Checker
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/medical-checkup" className="hover:text-white">
+                    Health Checkup
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/appointments" className="hover:text-white">
+                    Doctor Appointments
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/ehr" className="hover:text-white">
+                    Health Records
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-blue-200">
-                <li><a href="#" className="hover:text-white">About Us</a></li>
-                <li><a href="#" className="hover:text-white">Careers</a></li>
-                <li><a href="#" className="hover:text-white">Press</a></li>
-                <li><a href="#" className="hover:text-white">Contact</a></li>
+                <li>
+                  <a href="#" className="hover:text-white">
+                    About Us
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white">
+                    Careers
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white">
+                    Press
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white">
+                    Contact
+                  </a>
+                </li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Connect</h4>
               <div className="flex space-x-4">
-                <a href="#" className="text-blue-200 hover:text-white"><i className="fab fa-facebook-f"></i></a>
-                <a href="#" className="text-blue-200 hover:text-white"><i className="fab fa-twitter"></i></a>
-                <a href="#" className="text-blue-200 hover:text-white"><i className="fab fa-instagram"></i></a>
-                <a href="#" className="text-blue-200 hover:text-white"><i className="fab fa-linkedin-in"></i></a>
+                <a href="#" className="text-blue-200 hover:text-white">
+                  <i className="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" className="text-blue-200 hover:text-white">
+                  <i className="fab fa-twitter"></i>
+                </a>
+                <a href="#" className="text-blue-200 hover:text-white">
+                  <i className="fab fa-instagram"></i>
+                </a>
+                <a href="#" className="text-blue-200 hover:text-white">
+                  <i className="fab fa-linkedin-in"></i>
+                </a>
               </div>
             </div>
           </div>
