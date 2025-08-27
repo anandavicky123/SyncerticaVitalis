@@ -114,8 +114,7 @@ export default function MedicalCheckup() {
                           <span>Heart Disease</span>
                         </label>
                         <label className="flex items-center">
-                          <input type="checkbox" className="mr-2" />
-                          <span>Asthma</span>
+                          <input type="checkbox" className="mr-2" /<span>Asthma</span>
                         </label>
                         <label className="flex items-center">
                           <input type="checkbox" className="mr-2" />
@@ -128,7 +127,7 @@ export default function MedicalCheckup() {
                       <textarea 
                         className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300" 
                         rows={3}
-                        placeholder="List any medications you're currently taking..."
+                        placeholder="List any medications you&apos;re currently taking..."
                       ></textarea>
                     </div>
                   </div>

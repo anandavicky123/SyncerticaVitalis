@@ -57,7 +57,7 @@ export default function AboutUs() {
               At Syncertica Vitalis, we believe that everyone deserves access to high-quality healthcare. Our mission is to democratize healthcare by leveraging artificial intelligence and cutting-edge technology to provide personalized, accessible, and comprehensive health solutions.
             </p>
             <p className="text-lg text-gray-700">
-              We're committed to bridging the gap between patients and healthcare providers, making medical expertise available at your fingertips while maintaining the highest standards of privacy and security.
+              We&apos;re committed to bridging the gap between patients and healthcare providers, making medical expertise available at your fingertips while maintaining the highest standards of privacy and security.
             </p>
           </div>
         </section>
@@ -95,7 +95,7 @@ export default function AboutUs() {
                 <i className="fas fa-lightbulb text-purple-500 text-2xl"></i>
               </div>
               <h3 className="text-xl font-semibold text-blue-800 mb-4">Innovation</h3>
-              <p className="text-gray-600">We continuously push the boundaries of what's possible in healthcare technology, always seeking better ways to serve our users.</p>
+              <p className="text-gray-600">We continuously push the boundaries of what&apos;s possible in healthcare technology, always seeking better ways to serve our users.</p>
             </div>
           </div>
         </section>

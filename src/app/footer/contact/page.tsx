@@ -27,7 +27,7 @@ export default function Contact() {
     // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false);
-      alert('Thank you for your message! We\'ll get back to you soon.');
+      alert('Thank you for your message! We&apos;ll get back to you soon.');
       setFormData({ name: '', email: '', subject: '', message: '' });
     }, 2000);
   };
@@ -209,7 +209,7 @@ export default function Contact() {
                   <div>
                     <h3 className="font-semibold text-blue-800 mb-1">Email</h3>
                     <p className="text-gray-600">support@syncerticavitalis.com</p>
-                    <p className="text-sm text-gray-500">We'll respond within 24 hours</p>
+                    <p className="text-sm text-gray-500">We&apos;ll respond within 24 hours</p>
                   </div>
                 </div>
 

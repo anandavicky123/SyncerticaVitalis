@@ -160,7 +160,7 @@ export default function Security() {
               </div>
               <div>
                 <h3 className="text-xl font-bold text-blue-800 mb-4">Purpose Limitation</h3>
-                <p className="text-gray-600 mb-6">Your health data is used only for the specific purposes you've consented to and never for unauthorized purposes.</p>
+                <p className="text-gray-600 mb-6">Your health data is used only for the specific purposes you&apos;ve consented to and never for unauthorized purposes.</p>
                 
                 <h3 className="text-xl font-bold text-blue-800 mb-4">Data Retention</h3>
                 <p className="text-gray-600 mb-6">We retain your data only as long as necessary to provide services or as required by law.</p>

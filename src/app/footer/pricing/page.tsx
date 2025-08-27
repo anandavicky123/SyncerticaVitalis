@@ -106,7 +106,7 @@ export default function Pricing() {
           <div className="text-center">
             <h1 className="text-5xl font-bold text-blue-800 mb-4">Simple, Transparent Pricing</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-              Choose the plan that's right for you. Start free and upgrade as your health management needs grow.
+              Choose the plan that&apos;s right for you. Start free and upgrade as your health management needs grow.
             </p>
             
             {/* Billing Toggle */}
@@ -185,7 +185,7 @@ export default function Pricing() {
           <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-white rounded-2xl shadow-lg p-6">
               <h3 className="text-xl font-semibold text-blue-800 mb-3">Can I change plans anytime?</h3>
-              <p className="text-gray-600">Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately, and we'll prorate any billing adjustments.</p>
+              <p className="text-gray-600">Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately, and we&apos;ll prorate any billing adjustments.</p>
             </div>
             <div className="bg-white rounded-2xl shadow-lg p-6">
               <h3 className="text-xl font-semibold text-blue-800 mb-3">Is there a free trial?</h3>

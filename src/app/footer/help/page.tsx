@@ -88,7 +88,7 @@ export default function HelpCenter() {
         </div>
 
         <div className="mt-8 text-center">
-          <p className="text-gray-600 mb-4">Can't find what you're looking for?</p>
+          <p className="text-gray-600 mb-4">Can&apos;t find what you&apos;re looking for?</p>
           <Link href="/footer/contact" className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-xl transition-colors">
             Contact Support
           </Link>
