@@ -120,8 +120,8 @@ export default function MedicalCheckup() {
                   Using Your Profile Information
                 </h4>
                 <p className="text-blue-600 text-sm">
-                  We'll use the personal information from your profile for this
-                  checkup. You can update your details in your{" "}
+                  We&apos;ll use the personal information from your profile for
+                  this checkup. You can update your details in your{" "}
                   <Link
                     href="/profile"
                     className="underline hover:text-blue-800"

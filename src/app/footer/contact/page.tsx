@@ -1,23 +1,27 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
-import Footer from '@/components/Footer';
+import { useState } from "react";
+import Link from "next/link";
+import Footer from "@/components/Footer";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -27,8 +31,8 @@ export default function Contact() {
     // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false);
-      alert('Thank you for your message! We&apos;ll get back to you soon.');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      alert("Thank you for your message! We&apos;ll get back to you soon.");
+      setFormData({ name: "", email: "", subject: "", message: "" });
     }, 2000);
   };
 
@@ -41,18 +45,53 @@ export default function Contact() {
             <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-green-500 flex items-center justify-center">
               <i className="fas fa-heartbeat text-white text-xl"></i>
             </div>
-            <h1 className="text-xl font-bold text-blue-800">Syncertica Vitalis</h1>
+            <h1 className="text-xl font-bold text-blue-800">
+              Syncertica Vitalis
+            </h1>
           </div>
           <nav className="hidden md:flex space-x-8">
-            <Link href="/dashboard" className="text-blue-700 hover:text-blue-500 font-medium">Dashboard</Link>
-            <Link href="/symptom-checker" className="text-blue-700 hover:text-blue-500 font-medium">Symptom Checker</Link>
-            <Link href="/medical-checkup" className="text-blue-700 hover:text-blue-500 font-medium">Checkup</Link>
-            <Link href="/appointments" className="text-blue-700 hover:text-blue-500 font-medium">Appointments</Link>
-            <Link href="/ehr" className="text-blue-700 hover:text-blue-500 font-medium">EHR</Link>
-            <Link href="/insurance" className="text-blue-700 hover:text-blue-500 font-medium">Insurance</Link>
+            <Link
+              href="/dashboard"
+              className="text-blue-700 hover:text-blue-500 font-medium"
+            >
+              Dashboard
+            </Link>
+            <Link
+              href="/symptom-checker"
+              className="text-blue-700 hover:text-blue-500 font-medium"
+            >
+              Symptom Checker
+            </Link>
+            <Link
+              href="/medical-checkup"
+              className="text-blue-700 hover:text-blue-500 font-medium"
+            >
+              Checkup
+            </Link>
+            <Link
+              href="/appointments"
+              className="text-blue-700 hover:text-blue-500 font-medium"
+            >
+              Appointments
+            </Link>
+            <Link
+              href="/ehr"
+              className="text-blue-700 hover:text-blue-500 font-medium"
+            >
+              EHR
+            </Link>
+            <Link
+              href="/insurance"
+              className="text-blue-700 hover:text-blue-500 font-medium"
+            >
+              Insurance
+            </Link>
           </nav>
           <div className="flex items-center space-x-4">
-            <Link href="/profile" className="text-blue-700 hover:text-blue-500 font-medium">
+            <Link
+              href="/profile"
+              className="text-blue-700 hover:text-blue-500 font-medium"
+            >
               <i className="fas fa-user mr-2"></i>Profile
             </Link>
             <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full transition-all duration-300 shadow-md hover:shadow-lg">
@@ -74,16 +113,24 @@ export default function Contact() {
             </Link>
           </div>
           <h1 className="text-4xl font-bold text-blue-800 mb-4">Contact Us</h1>
-          <p className="text-lg text-gray-600">Get in touch with our team. We're here to help with any questions or concerns.</p>
+          <p className="text-lg text-gray-600">
+            Get in touch with our team. We&apos;re here to help with any
+            questions or concerns.
+          </p>
         </section>
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <div className="bg-white rounded-2xl shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-blue-900 mb-6">Send us a Message</h2>
+            <h2 className="text-2xl font-bold text-blue-900 mb-6">
+              Send us a Message
+            </h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Full Name
                 </label>
                 <input
@@ -99,7 +146,10 @@ export default function Contact() {
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Email Address
                 </label>
                 <input
@@ -115,7 +165,10 @@ export default function Contact() {
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="subject"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Subject
                 </label>
                 <select
@@ -137,7 +190,10 @@ export default function Contact() {
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Message
                 </label>
                 <textarea
@@ -175,17 +231,23 @@ export default function Contact() {
           {/* Contact Information */}
           <div className="space-y-8">
             <div className="bg-white rounded-2xl shadow-lg p-8">
-              <h2 className="text-2xl font-bold text-blue-900 mb-6">Get in Touch</h2>
+              <h2 className="text-2xl font-bold text-blue-900 mb-6">
+                Get in Touch
+              </h2>
               <div className="space-y-6">
                 <div className="flex items-start">
                   <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
                     <i className="fas fa-map-marker-alt text-blue-500"></i>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-blue-800 mb-1">Address</h3>
+                    <h3 className="font-semibold text-blue-800 mb-1">
+                      Address
+                    </h3>
                     <p className="text-gray-600">
-                      123 Healthcare Innovation Blvd<br />
-                      San Francisco, CA 94105<br />
+                      123 Healthcare Innovation Blvd
+                      <br />
+                      San Francisco, CA 94105
+                      <br />
                       United States
                     </p>
                   </div>
@@ -208,8 +270,12 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-blue-800 mb-1">Email</h3>
-                    <p className="text-gray-600">support@syncerticavitalis.com</p>
-                    <p className="text-sm text-gray-500">We&apos;ll respond within 24 hours</p>
+                    <p className="text-gray-600">
+                      support@syncerticavitalis.com
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      We&apos;ll respond within 24 hours
+                    </p>
                   </div>
                 </div>
 
@@ -218,28 +284,49 @@ export default function Contact() {
                     <i className="fas fa-clock text-orange-500"></i>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-blue-800 mb-1">Emergency Support</h3>
+                    <h3 className="font-semibold text-blue-800 mb-1">
+                      Emergency Support
+                    </h3>
                     <p className="text-gray-600">24/7 Technical Support</p>
-                    <p className="text-sm text-gray-500">For urgent technical issues</p>
+                    <p className="text-sm text-gray-500">
+                      For urgent technical issues
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-2xl p-8">
-              <h3 className="text-xl font-bold text-blue-900 mb-4">Frequently Asked Questions</h3>
+              <h3 className="text-xl font-bold text-blue-900 mb-4">
+                Frequently Asked Questions
+              </h3>
               <div className="space-y-4">
                 <div>
-                  <h4 className="font-semibold text-blue-800 mb-2">How secure is my health data?</h4>
-                  <p className="text-blue-700 text-sm">We use enterprise-grade encryption and are fully HIPAA compliant to protect your health information.</p>
+                  <h4 className="font-semibold text-blue-800 mb-2">
+                    How secure is my health data?
+                  </h4>
+                  <p className="text-blue-700 text-sm">
+                    We use enterprise-grade encryption and are fully HIPAA
+                    compliant to protect your health information.
+                  </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-blue-800 mb-2">Is the AI diagnosis reliable?</h4>
-                  <p className="text-blue-700 text-sm">Our AI provides informational assessments only. Always consult with healthcare professionals for medical decisions.</p>
+                  <h4 className="font-semibold text-blue-800 mb-2">
+                    Is the AI diagnosis reliable?
+                  </h4>
+                  <p className="text-blue-700 text-sm">
+                    Our AI provides informational assessments only. Always
+                    consult with healthcare professionals for medical decisions.
+                  </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-blue-800 mb-2">How do I update my profile information?</h4>
-                  <p className="text-blue-700 text-sm">You can update your profile anytime by visiting your Profile page in the main navigation.</p>
+                  <h4 className="font-semibold text-blue-800 mb-2">
+                    How do I update my profile information?
+                  </h4>
+                  <p className="text-blue-700 text-sm">
+                    You can update your profile anytime by visiting your Profile
+                    page in the main navigation.
+                  </p>
                 </div>
               </div>
             </div>
