@@ -4,13 +4,50 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+interface ProfileData {
+  // Personal Information
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  dateOfBirth: string;
+  gender: string;
+
+  // Location Information
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  country: string;
+
+  // Identity & Preferences
+  pronouns: string;
+  preferredLanguage: string;
+  emergencyContact: string;
+  emergencyPhone: string;
+
+  // Medical Information
+  congenitalDiseases: string[];
+  allergies: string[];
+  disabilities: string[];
+  bloodType: string;
+  height: string;
+  weight: string;
+
+  // Additional Medical Info
+  medications: string[];
+  medicalConditions: string[];
+  surgeries: string[];
+  familyHistory: string[];
+}
+
 export default function Profile() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("personal");
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
-  const [profileData, setProfileData] = useState({
+  const [profileData, setProfileData] = useState<ProfileData>({
     // Personal Information
     firstName: "John",
     lastName: "Doe",
@@ -59,37 +96,42 @@ export default function Profile() {
     }));
   };
 
+  type ArrayFields = keyof Pick<
+    ProfileData,
+    | "congenitalDiseases"
+    | "allergies"
+    | "disabilities"
+    | "medications"
+    | "medicalConditions"
+    | "surgeries"
+    | "familyHistory"
+  >;
+
   const handleArrayInputChange = (
-    field: string,
+    field: ArrayFields,
     index: number,
     value: string
   ) => {
     setProfileData((prev) => ({
       ...prev,
-      [field]: prev[field as keyof typeof prev].map((item: string, i: number) =>
+      [field]: prev[field].map((item: string, i: number) =>
         i === index ? value : item
       ),
     }));
   };
 
-  const addArrayItem = (field: string) => {
+  const addArrayItem = (field: ArrayFields) => {
     setProfileData((prev) => ({
       ...prev,
-      [field]: [...prev[field as keyof typeof prev], ""],
+      [field]: [...prev[field], ""],
     }));
   };
 
-  const removeArrayItem = (field: string, index: number) => {
-    setProfileData((prev) => {
-      const value = prev[field as keyof typeof prev];
-      if (Array.isArray(value)) {
-        return {
-          ...prev,
-          [field]: value.filter((_, i: number) => i !== index),
-        };
-      }
-      return prev;
-    });
+  const removeArrayItem = (field: ArrayFields, index: number) => {
+    setProfileData((prev) => ({
+      ...prev,
+      [field]: prev[field].filter((_, i: number) => i !== index),
+    }));
   };
 
   const handleSave = async () => {
