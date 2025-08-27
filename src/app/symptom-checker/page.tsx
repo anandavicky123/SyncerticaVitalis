@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Footer from "@/components/Footer";
 
 export default function SymptomChecker() {
   return (
@@ -304,88 +305,7 @@ export default function SymptomChecker() {
         </section>
       </main>
 
-      <footer className="bg-blue-900 text-white py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-xl font-bold mb-4">Syncertica Vitalis</h3>
-              <p className="text-blue-200">
-                Integrating AI and healthcare for better patient outcomes.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Services</h4>
-              <ul className="space-y-2 text-blue-200">
-                <li>
-                  <Link href="/symptom-checker" className="hover:text-white">
-                    Symptom Checker
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/medical-checkup" className="hover:text-white">
-                    Health Checkup
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/appointments" className="hover:text-white">
-                    Doctor Appointments
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/ehr" className="hover:text-white">
-                    Health Records
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Company</h4>
-              <ul className="space-y-2 text-blue-200">
-                <li>
-                  <a href="#" className="hover:text-white">
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Careers
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Press
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Contact
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Connect</h4>
-              <div className="flex space-x-4">
-                <a href="#" className="text-blue-200 hover:text-white">
-                  <i className="fab fa-facebook-f"></i>
-                </a>
-                <a href="#" className="text-blue-200 hover:text-white">
-                  <i className="fab fa-twitter"></i>
-                </a>
-                <a href="#" className="text-blue-200 hover:text-white">
-                  <i className="fab fa-instagram"></i>
-                </a>
-                <a href="#" className="text-blue-200 hover:text-white">
-                  <i className="fab fa-linkedin-in"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-blue-800 mt-8 pt-8 text-sm text-blue-300 text-center">
-            <p>© 2025 Syncertica Vitalis. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
