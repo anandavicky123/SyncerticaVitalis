@@ -46,8 +46,8 @@ export default function Dashboard() {
 
   const handleSignOut = () => {
     // Clear any stored authentication data
-    localStorage.removeItem('authToken');
-    sessionStorage.removeItem('authToken');
+    localStorage.removeItem('userUUID');
+    localStorage.removeItem('userRole');
     // Redirect to landing page
     router.push('/');
   };
@@ -64,15 +64,15 @@ export default function Dashboard() {
             <h1 className="text-xl font-bold text-blue-800">Syncertica Vitalis</h1>
           </div>
           <nav className="hidden md:flex space-x-8">
-            <Link href="/dashboard" className="text-blue-700 hover:text-blue-500 font-medium border-b-2 border-blue-500">Dashboard</Link>
-            <Link href="/symptom-checker" className="text-blue-700 hover:text-blue-500 font-medium">Symptom Checker</Link>
-            <Link href="/medical-checkup" className="text-blue-700 hover:text-blue-500 font-medium">Checkup</Link>
-            <Link href="/appointments" className="text-blue-700 hover:text-blue-500 font-medium">Appointments</Link>
-            <Link href="/ehr" className="text-blue-700 hover:text-blue-500 font-medium">EHR</Link>
-            <Link href="/insurance" className="text-blue-700 hover:text-blue-500 font-medium">Insurance</Link>
+            <Link href="/patient" className="text-blue-700 hover:text-blue-500 font-medium border-b-2 border-blue-500">Dashboard</Link>
+            <Link href="/patient/symptom-checker" className="text-blue-700 hover:text-blue-500 font-medium">Symptom Checker</Link>
+            <Link href="/patient/medical-checkup" className="text-blue-700 hover:text-blue-500 font-medium">Checkup</Link>
+            <Link href="/patient/appointments" className="text-blue-700 hover:text-blue-500 font-medium">Appointments</Link>
+            <Link href="/patient/ehr" className="text-blue-700 hover:text-blue-500 font-medium">EHR</Link>
+            <Link href="/patient/insurance" className="text-blue-700 hover:text-blue-500 font-medium">Insurance</Link>
           </nav>
           <div className="flex items-center space-x-4">
-            <Link href="/profile" className="text-blue-700 hover:text-blue-500 font-medium">
+            <Link href="/patient/profile" className="text-blue-700 hover:text-blue-500 font-medium">
               <i className="fas fa-user mr-2"></i>Profile
             </Link>
             <button 
@@ -95,10 +95,10 @@ export default function Dashboard() {
             <h2 className="text-4xl md:text-5xl font-bold text-blue-900 mb-4">Welcome Back!</h2>
             <p className="text-lg text-blue-700 mb-8">Your health dashboard is ready. Syncertica Vitalis brings together AI-powered healthcare tools, electronic health records, and provider connections in one seamless experience.</p>
             <div className="flex flex-wrap gap-4">
-              <Link href="/symptom-checker" className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full transition-all duration-300 shadow-md hover:shadow-lg flex items-center">
+              <Link href="/patient/symptom-checker" className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full transition-all duration-300 shadow-md hover:shadow-lg flex items-center">
                 <i className="fas fa-notes-medical mr-2"></i> Start Health Check
               </Link>
-              <Link href="/appointments" className="bg-white text-blue-700 hover:bg-blue-50 px-6 py-3 rounded-full transition-all duration-300 shadow-md hover:shadow-lg flex items-center">
+              <Link href="/patient/appointments" className="bg-white text-blue-700 hover:bg-blue-50 px-6 py-3 rounded-full transition-all duration-300 shadow-md hover:shadow-lg flex items-center">
                 <i className="fas fa-calendar-alt mr-2"></i> Book Appointment
               </Link>
             </div>
@@ -175,13 +175,13 @@ export default function Dashboard() {
                 <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-xl transition-colors">
                   <i className="fas fa-video mr-2"></i>Join Virtual
                 </button>
-                <Link href="/appointments" className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-xl transition-colors">
+                <Link href="/patient/appointments" className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-xl transition-colors">
                   Reschedule
                 </Link>
               </div>
             </div>
             <div className="mt-4 text-center">
-              <Link href="/appointments" className="text-blue-600 hover:text-blue-800 font-medium">
+              <Link href="/patient/appointments" className="text-blue-600 hover:text-blue-800 font-medium">
                 View all appointments →
               </Link>
             </div>
@@ -243,7 +243,7 @@ export default function Dashboard() {
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-800 mb-6">Quick Actions</h2>
           <div className="grid md:grid-cols-3 gap-6">
-            <Link href="/symptom-checker" className="bg-white rounded-2xl shadow-lg p-6 card-hover block">
+            <Link href="/patient/symptom-checker" className="bg-white rounded-2xl shadow-lg p-6 card-hover block">
               <div className="text-center">
                 <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <i className="fas fa-search-plus text-red-500 text-2xl"></i>
@@ -252,7 +252,7 @@ export default function Dashboard() {
                 <p className="text-gray-600">Get AI-powered health assessments</p>
               </div>
             </Link>
-            <Link href="/medical-checkup" className="bg-white rounded-2xl shadow-lg p-6 card-hover block">
+            <Link href="/patient/medical-checkup" className="bg-white rounded-2xl shadow-lg p-6 card-hover block">
               <div className="text-center">
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <i className="fas fa-clipboard-check text-green-500 text-2xl"></i>
@@ -261,7 +261,7 @@ export default function Dashboard() {
                 <p className="text-gray-600">Complete your medical assessment</p>
               </div>
             </Link>
-            <Link href="/ehr" className="bg-white rounded-2xl shadow-lg p-6 card-hover block">
+            <Link href="/patient/ehr" className="bg-white rounded-2xl shadow-lg p-6 card-hover block">
               <div className="text-center">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <i className="fas fa-file-medical text-blue-500 text-2xl"></i>

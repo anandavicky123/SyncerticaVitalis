@@ -6,18 +6,17 @@ import Link from 'next/link';
 export default function SignIn() {
   const [isSignUp, setIsSignUp] = useState(false);
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
+    uuid: '',
+    role: 'patient',
     firstName: '',
     lastName: '',
     agreeToTerms: false
   });
-  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
+    const checked = 'checked' in e.target ? e.target.checked : false;
     setFormData(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value
@@ -28,20 +27,34 @@ export default function SignIn() {
     e.preventDefault();
     setIsLoading(true);
     
+    // Generate UUID for new user or use existing UUID
+    let userUUID = formData.uuid;
+    if (isSignUp && !userUUID) {
+      // Generate UUID here or get from backend
+      userUUID = crypto.randomUUID();
+    }
+    
+    // Store authentication data
+    localStorage.setItem('userUUID', userUUID);
+    localStorage.setItem('userRole', formData.role);
+    
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
-      // Redirect to dashboard after successful login
-      window.location.href = '/dashboard';
+      // Redirect based on role
+      if (formData.role === 'doctor') {
+        window.location.href = '/doctor';
+      } else {
+        window.location.href = '/patient';
+      }
     }, 2000);
   };
 
   const toggleMode = () => {
     setIsSignUp(!isSignUp);
     setFormData({
-      email: '',
-      password: '',
-      confirmPassword: '',
+      uuid: '',
+      role: 'patient',
       firstName: '',
       lastName: '',
       agreeToTerms: false
@@ -73,6 +86,23 @@ export default function SignIn() {
         {/* Sign In Form */}
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <form className="space-y-6" onSubmit={handleSubmit}>
+            {/* Role Selection */}
+            <div>
+              <label htmlFor="role" className="block text-sm font-medium text-gray-700 mb-2">
+                I am signing in as
+              </label>
+              <select
+                id="role"
+                name="role"
+                value={formData.role}
+                onChange={handleInputChange}
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+              >
+                <option value="patient">Patient</option>
+                <option value="doctor">Doctor</option>
+              </select>
+            </div>
+
             {isSignUp && (
               <div className="grid grid-cols-2 gap-4">
                 <div>
@@ -109,70 +139,30 @@ export default function SignIn() {
             )}
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Email Address
+              <label htmlFor="uuid" className="block text-sm font-medium text-gray-700 mb-2">
+                {isSignUp ? 'Your UUID will be generated automatically' : 'UUID'}
               </label>
-              <div className="relative">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 pl-12 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                  placeholder="john@example.com"
-                />
-                <i className="fas fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                Password
-              </label>
-              <div className="relative">
-                <input
-                  id="password"
-                  name="password"
-                  type={showPassword ? 'text' : 'password'}
-                  required
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 pl-12 pr-12 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                  placeholder="••••••••"
-                />
-                <i className="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                >
-                  <i className={`fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
-                </button>
-              </div>
-            </div>
-
-            {isSignUp && (
-              <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
-                  Confirm Password
-                </label>
+              {isSignUp ? (
+                <div className="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 text-gray-500 flex items-center">
+                  <i className="fas fa-key mr-3"></i>
+                  <span>UUID will be generated upon account creation</span>
+                </div>
+              ) : (
                 <div className="relative">
                   <input
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    type={showPassword ? 'text' : 'password'}
-                    required={isSignUp}
-                    value={formData.confirmPassword}
+                    id="uuid"
+                    name="uuid"
+                    type="text"
+                    required={!isSignUp}
+                    value={formData.uuid}
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 pl-12 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                    placeholder="••••••••"
+                    placeholder="Enter your UUID"
                   />
-                  <i className="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                  <i className="fas fa-key absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
 
             {!isSignUp && (
               <div className="flex items-center justify-between">
@@ -188,7 +178,7 @@ export default function SignIn() {
                   </label>
                 </div>
                 <a href="#" className="text-sm text-blue-600 hover:text-blue-500">
-                  Forgot password?
+                  Forgot UUID?
                 </a>
               </div>
             )}
