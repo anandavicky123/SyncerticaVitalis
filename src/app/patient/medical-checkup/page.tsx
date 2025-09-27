@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Footer from "@/components/Footer";
+import PatientHeader from "@/components/PatientHeader";
 
 export default function MedicalCheckup() {
   const [checkupProgress, setCheckupProgress] = useState(33);
@@ -24,78 +25,14 @@ export default function MedicalCheckup() {
 
   return (
     <div className="bg-gray-50 text-gray-800 min-h-screen">
-      {/* Header/Navigation */}
-      <header className="bg-white shadow-md sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-green-500 flex items-center justify-center">
-              <i className="fas fa-heartbeat text-white text-xl"></i>
-            </div>
-            <h1 className="text-xl font-bold text-blue-800">
-              Syncertica Vitalis
-            </h1>
-          </div>
-          <nav className="hidden md:flex space-x-8">
-            <Link
-              href="/dashboard"
-              className="text-blue-700 hover:text-blue-500 font-medium"
-            >
-              Dashboard
-            </Link>
-            <Link
-              href="/symptom-checker"
-              className="text-blue-700 hover:text-blue-500 font-medium"
-            >
-              Symptom Checker
-            </Link>
-            <Link
-              href="/medical-checkup"
-              className="text-blue-700 hover:text-blue-500 font-medium border-b-2 border-blue-500"
-            >
-              Checkup
-            </Link>
-            <Link
-              href="/appointments"
-              className="text-blue-700 hover:text-blue-500 font-medium"
-            >
-              Appointments
-            </Link>
-            <Link
-              href="/ehr"
-              className="text-blue-700 hover:text-blue-500 font-medium"
-            >
-              EHR
-            </Link>
-            <Link
-              href="/insurance"
-              className="text-blue-700 hover:text-blue-500 font-medium"
-            >
-              Insurance
-            </Link>
-          </nav>
-          <div className="flex items-center space-x-4">
-            <Link
-              href="/profile"
-              className="text-blue-700 hover:text-blue-500 font-medium"
-            >
-              <i className="fas fa-user mr-2"></i>Profile
-            </Link>
-            <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full transition-all duration-300 shadow-md hover:shadow-lg">
-              Sign Out
-            </button>
-            <button className="md:hidden text-blue-700">
-              <i className="fas fa-bars text-xl"></i>
-            </button>
-          </div>
-        </div>
-      </header>
+      <PatientHeader currentPage="medical-checkup" />
 
       <main className="container mx-auto px-4 py-8">
         {/* Page Header */}
         <section className="mb-8">
           <div className="flex items-center mb-4">
             <Link
-              href="/dashboard"
+              href="/patient"
               className="text-blue-600 hover:text-blue-800 mr-2"
             >
               <i className="fas fa-arrow-left"></i> Back to Dashboard
